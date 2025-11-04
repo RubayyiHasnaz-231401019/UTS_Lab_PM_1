@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../data/categories_data.dart';
 import '../providers/user_provider.dart';
 import '../providers/quiz_provider.dart';
+import '../providers/theme_provider.dart';
 import '../utils/app_colors.dart';
 import '../utils/text_styles.dart';
 import '../widgets/category_card.dart';
@@ -35,16 +36,23 @@ class _HomeScreenState extends State<HomeScreen> {
     final screenHeight = MediaQuery.of(context).size.height;
     final userName = Provider.of<UserProvider>(context).userName;
     final quizProvider = Provider.of<QuizProvider>(context, listen: false);
+    final themeProvider = Provider.of<ThemeProvider>(context);
 
     return Scaffold(
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: AppColors.backgroundGradient,
+            colors: themeProvider.isDarkMode
+                ? AppColors.backgroundGradient
+                : [
+                    const Color(0xFFE3F2FD),
+                    const Color(0xFFBBDEFB),
+                    const Color(0xFF90CAF9),
+                  ],
           ),
         ),
         child: SafeArea(
@@ -61,26 +69,51 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Text(
                           'Halo, $userName',
-                          style: AppTextStyles.heading2(screenWidth),
+                          style: AppTextStyles.heading2(screenWidth).copyWith(
+                            color: themeProvider.isDarkMode
+                                ? Colors.white
+                                : Colors.black87,
+                          ),
                         ),
                         Text(
                           'Pilih kategori quiz',
                           style: AppTextStyles.bodyMedium(screenWidth).copyWith(
-                            color: AppColors.textSecondary,
+                            color: themeProvider.isDarkMode
+                                ? AppColors.textSecondary
+                                : Colors.black54,
                           ),
                         ),
                       ],
                     ),
-                    Container(
-                      padding: EdgeInsets.all(screenWidth * 0.03),
-                      decoration: BoxDecoration(
-                        color: AppColors.accentYellow,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        Icons.star,
-                        color: AppColors.primaryBlue,
-                        size: screenWidth * 0.06,
+                    // Theme Toggle Button
+                    GestureDetector(
+                      onTap: () {
+                        themeProvider.toggleTheme();
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(screenWidth * 0.03),
+                        decoration: BoxDecoration(
+                          color: themeProvider.isDarkMode
+                              ? AppColors.accentYellow
+                              : Colors.amber,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              blurRadius: 8,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Icon(
+                          themeProvider.isDarkMode
+                              ? Icons.wb_sunny
+                              : Icons.nightlight_round,
+                          color: themeProvider.isDarkMode
+                              ? AppColors.primaryBlue
+                              : Colors.white,
+                          size: screenWidth * 0.06,
+                        ),
                       ),
                     ),
                   ],

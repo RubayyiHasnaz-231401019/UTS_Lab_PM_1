@@ -16,9 +16,15 @@ class QuizScreen extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return WillPopScope(
-      onWillPop: () async {
-        return await _showExitDialog(context);
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) async {
+        if (!didPop) {
+          bool shouldExit = await _showExitDialog(context);
+          if (shouldExit && context.mounted) {
+            Navigator.pop(context);
+          }
+        }
       },
       child: Scaffold(
         body: Container(
@@ -46,7 +52,7 @@ class QuizScreen extends StatelessWidget {
                       categoryName: quizProvider.currentCategoryName,
                       onBack: () async {
                         bool shouldExit = await _showExitDialog(context);
-                        if (shouldExit) {
+                        if (shouldExit && context.mounted) {
                           Navigator.pop(context);
                         }
                       },
