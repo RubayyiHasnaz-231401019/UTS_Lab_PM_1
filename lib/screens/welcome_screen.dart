@@ -58,20 +58,40 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(height: screenHeight * 0.1),
+                  SizedBox(height: screenHeight * 0.08),
 
                   // Astronaut Image
                   Container(
-                    width: screenWidth * 0.5,
-                    height: screenWidth * 0.5,
+                    width: screenWidth * 0.6,
+                    height: screenWidth * 0.6,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: AppColors.accentYellow.withOpacity(0.2),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.accentYellow.withOpacity(0.3),
+                          blurRadius: 30,
+                          spreadRadius: 5,
+                        ),
+                      ],
                     ),
-                    child: Icon(
-                      Icons.rocket_launch,
-                      size: screenWidth * 0.25,
-                      color: AppColors.accentYellow,
+                    child: ClipOval(
+                      child: Image.asset(
+                        'assets/images/welcome_astronaut.png',
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Container(
+                            decoration: BoxDecoration(
+                              color: AppColors.accentYellow.withOpacity(0.2),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              Icons.rocket_launch,
+                              size: screenWidth * 0.3,
+                              color: AppColors.accentYellow,
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
 
@@ -92,6 +112,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   ),
 
+                  SizedBox(height: screenHeight * 0.01),
+
+                  Text(
+                    'Uji pengetahuan astronomi Anda!',
+                    style: AppTextStyles.bodyMedium(screenWidth).copyWith(
+                      color: AppColors.textSecondary,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+
                   SizedBox(height: screenHeight * 0.05),
 
                   // Name Input
@@ -108,6 +138,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(screenWidth * 0.03),
                         borderSide: BorderSide.none,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(screenWidth * 0.03),
+                        borderSide: BorderSide.none,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(screenWidth * 0.03),
+                        borderSide: BorderSide(
+                          color: AppColors.accentYellow,
+                          width: 2,
+                        ),
                       ),
                       prefixIcon: Icon(
                         Icons.person,
@@ -141,16 +182,27 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         ),
                         elevation: 5,
                       ),
-                      child: Text(
-                        'Mulai Petualangan',
-                        style: AppTextStyles.button(screenWidth).copyWith(
-                          color: AppColors.primaryBlue,
-                        ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.rocket_launch,
+                            color: AppColors.primaryBlue,
+                            size: screenWidth * 0.06,
+                          ),
+                          SizedBox(width: screenWidth * 0.02),
+                          Text(
+                            'Mulai Petualangan',
+                            style: AppTextStyles.button(screenWidth).copyWith(
+                              color: AppColors.primaryBlue,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
 
-                  SizedBox(height: screenHeight * 0.05),
+                  SizedBox(height: screenHeight * 0.03),
                 ],
               ),
             ),

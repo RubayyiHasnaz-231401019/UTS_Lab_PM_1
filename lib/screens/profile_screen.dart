@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/user_provider.dart';
+import '../providers/theme_provider.dart';
 import '../utils/app_colors.dart';
 import '../utils/text_styles.dart';
 import '../widgets/bottom_nav_bar.dart';
@@ -122,16 +123,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     final userProvider = Provider.of<UserProvider>(context);
+    final themeProvider = Provider.of<ThemeProvider>(context);
 
     return Scaffold(
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: AppColors.backgroundGradient,
+            colors: themeProvider.isDarkMode
+                ? AppColors.backgroundGradient
+                : [
+                    const Color(0xFFE3F2FD),
+                    const Color(0xFFBBDEFB),
+                    const Color(0xFF90CAF9),
+                  ],
           ),
         ),
         child: SafeArea(
@@ -145,7 +153,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   // Profile Header
                   Text(
                     'Profile',
-                    style: AppTextStyles.heading1(screenWidth),
+                    style: AppTextStyles.heading1(screenWidth).copyWith(
+                      color: themeProvider.textPrimaryColor,
+                    ),
                   ),
 
                   SizedBox(height: screenHeight * 0.03),
@@ -161,6 +171,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         color: AppColors.accentYellow,
                         width: 3,
                       ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.accentYellow.withOpacity(0.3),
+                          blurRadius: 20,
+                          spreadRadius: 5,
+                        ),
+                      ],
                     ),
                     child: Icon(
                       Icons.person,
@@ -174,7 +191,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   // Username
                   Text(
                     userProvider.userName,
-                    style: AppTextStyles.heading2(screenWidth),
+                    style: AppTextStyles.heading2(screenWidth).copyWith(
+                      color: themeProvider.textPrimaryColor,
+                    ),
                   ),
 
                   SizedBox(height: screenHeight * 0.01),
@@ -182,7 +201,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Text(
                     'Space Explorer',
                     style: AppTextStyles.bodyMedium(screenWidth).copyWith(
-                      color: AppColors.textSecondary,
+                      color: themeProvider.textSecondaryColor,
                     ),
                   ),
 
@@ -266,7 +285,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Container(
                     padding: EdgeInsets.all(screenWidth * 0.04),
                     decoration: BoxDecoration(
-                      color: AppColors.cardBackground.withOpacity(0.5),
+                      color: themeProvider.isDarkMode
+                          ? AppColors.cardBackground.withOpacity(0.5)
+                          : Colors.white.withOpacity(0.7),
                       borderRadius: BorderRadius.circular(screenWidth * 0.03),
                     ),
                     child: Column(
@@ -282,7 +303,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             SizedBox(width: screenWidth * 0.02),
                             Text(
                               'AstroQuest v1.0.0',
-                              style: AppTextStyles.bodySmall(screenWidth),
+                              style: AppTextStyles.bodySmall(screenWidth).copyWith(
+                                color: themeProvider.textSecondaryColor,
+                              ),
                             ),
                           ],
                         ),
@@ -313,15 +336,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    final themeProvider = Provider.of<ThemeProvider>(context);
 
     return Container(
       padding: EdgeInsets.all(screenWidth * 0.04),
       decoration: BoxDecoration(
-        color: AppColors.cardBackground,
+        color: themeProvider.cardColor,
         borderRadius: BorderRadius.circular(screenWidth * 0.03),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.3),
+            color: Colors.black.withOpacity(0.2),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -339,6 +363,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             value,
             style: AppTextStyles.heading3(screenWidth).copyWith(
               fontSize: isLongText ? screenWidth * 0.035 : screenWidth * 0.05,
+              color: themeProvider.textPrimaryColor,
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -346,7 +371,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           SizedBox(height: screenHeight * 0.005),
           Text(
             label,
-            style: AppTextStyles.bodySmall(screenWidth),
+            style: AppTextStyles.bodySmall(screenWidth).copyWith(
+              color: themeProvider.textSecondaryColor,
+            ),
             textAlign: TextAlign.center,
           ),
         ],
@@ -363,13 +390,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     bool isDestructive = false,
   }) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final themeProvider = Provider.of<ThemeProvider>(context);
 
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.all(screenWidth * 0.04),
         decoration: BoxDecoration(
-          color: AppColors.cardBackground,
+          color: themeProvider.cardColor,
           borderRadius: BorderRadius.circular(screenWidth * 0.03),
           border: Border.all(
             color: isDestructive
@@ -379,7 +407,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.3),
+              color: Colors.black.withOpacity(0.2),
               blurRadius: 4,
               offset: const Offset(0, 2),
             ),
@@ -410,18 +438,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     title,
                     style: AppTextStyles.bodyMedium(screenWidth).copyWith(
                       fontWeight: FontWeight.bold,
+                      color: themeProvider.textPrimaryColor,
                     ),
                   ),
                   Text(
                     subtitle,
-                    style: AppTextStyles.bodySmall(screenWidth),
+                    style: AppTextStyles.bodySmall(screenWidth).copyWith(
+                      color: themeProvider.textSecondaryColor,
+                    ),
                   ),
                 ],
               ),
             ),
             Icon(
               Icons.arrow_forward_ios,
-              color: AppColors.textSecondary,
+              color: themeProvider.textSecondaryColor,
               size: screenWidth * 0.04,
             ),
           ],
