@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/theme_provider.dart';
 import '../utils/app_colors.dart';
 
 class BottomNavBar extends StatelessWidget {
@@ -14,13 +16,16 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final themeProvider = Provider.of<ThemeProvider>(context);
 
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.cardBackground,
+        color: themeProvider.isDarkMode
+            ? AppColors.cardBackground
+            : Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.3),
+            color: Colors.black.withOpacity(0.2),
             blurRadius: 8,
             offset: const Offset(0, -2),
           ),
@@ -30,8 +35,12 @@ class BottomNavBar extends StatelessWidget {
         currentIndex: currentIndex,
         onTap: onTap,
         backgroundColor: Colors.transparent,
-        selectedItemColor: AppColors.accentYellow,
-        unselectedItemColor: AppColors.textSecondary,
+        selectedItemColor: themeProvider.isDarkMode
+            ? AppColors.accentYellow
+            : Colors.blue,
+        unselectedItemColor: themeProvider.isDarkMode
+            ? AppColors.textSecondary
+            : Colors.black45,
         selectedFontSize: screenWidth * 0.035,
         unselectedFontSize: screenWidth * 0.03,
         type: BottomNavigationBarType.fixed,
