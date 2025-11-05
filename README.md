@@ -2,9 +2,9 @@
 
 Aplikasi quiz astronomi untuk menguji pengetahuan tentang luar angkasa.
 
-- **Nama:** Rubayyi
-- **NIM:** 123456789
-- **Lab:** Pemograman Mobile 1
+**Nama:** Rubayyi Hasnaz
+**NIM:** 231401019
+**Lab:** Pemograman Mobile 1
 
 ## Deskripsi Aplikasi
 AstroQuest adalah aplikasi quiz interaktif yang menguji pengetahuan pengguna tentang astronomi. Aplikasi ini memiliki 5 kategori quiz dengan total 25 pertanyaan pilihan ganda.
