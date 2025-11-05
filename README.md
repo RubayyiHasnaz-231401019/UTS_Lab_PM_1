@@ -2,7 +2,6 @@
 
 Aplikasi quiz astronomi untuk menguji pengetahuan tentang luar angkasa.
 
-## Informasi Mahasiswa
 - **Nama:** Rubayyi
 - **NIM:** 123456789
 - **Lab:** Pemograman Mobile 1
@@ -11,14 +10,14 @@ Aplikasi quiz astronomi untuk menguji pengetahuan tentang luar angkasa.
 AstroQuest adalah aplikasi quiz interaktif yang menguji pengetahuan pengguna tentang astronomi. Aplikasi ini memiliki 5 kategori quiz dengan total 25 pertanyaan pilihan ganda.
 
 ### Fitur Utama
-- ✅ 5 kategori quiz (Planet & Tata Surya, Bintang & Galaksi, Eksplorasi Luar Angkasa, Fenomena Langit, Teknologi & Penemuan)
-- ✅ Setiap kategori memiliki 5 pertanyaan pilihan ganda
-- ✅ Sistem scoring dan review jawaban
-- ✅ Profile dengan statistik user (total quiz, total skor, rata-rata, kategori favorit)
-- ✅ Dark/Light mode 
-- ✅ Responsive design untuk berbagai ukuran layar
-- ✅ Animasi dan transisi yang smooth
-- ✅ Custom fonts (Orbitron & Poppins)
+✅ 5 kategori quiz (Planet & Tata Surya, Bintang & Galaksi, Eksplorasi Luar Angkasa, Fenomena Langit, Teknologi & Penemuan)
+✅ Setiap kategori memiliki 5 pertanyaan pilihan ganda
+✅ Sistem scoring dan review jawaban
+✅ Profile dengan statistik user (total quiz, total skor, rata-rata, kategori favorit)
+✅ Dark/Light mode 
+✅ Responsive design untuk berbagai ukuran layar
+✅ Animasi dan transisi yang smooth
+✅ Custom fonts (Orbitron & Poppins)
 
 ## Screenshot Aplikasi
 
