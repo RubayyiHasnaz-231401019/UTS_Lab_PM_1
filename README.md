@@ -30,6 +30,9 @@ _(Screenshot akan ditambahkan)_
 - **Fonts:** [Google Fonts](https://fonts.google.com)
   - Orbitron (Heading)
   - Poppins (Body Text)
+- **Referensi Design figma:**
+  - https://ui8.net/yousuf_saymon/products/educora---e-learning-ui-kit
+  - https://ui8.net/edzjey-store/products/live-edu---mobile-app-for-learning-english
 
 ## Teknologi yang Digunakan
 - **Flutter** 3.x
@@ -51,7 +54,7 @@ lib/
 ```
 
 ## Link Mockup/Prototype
-[https://www.figma.com/design/QwFGX5QDr4iHSc3oVeM2Yq/AstroQuest?node-id=0-1&t=HaFCGTe3ur6mxN60-1)]
+[https://www.figma.com/design/QwFGX5QDr4iHSc3oVeM2Yq/AstroQuest?node-id=0-1&t=HaFCGTe3ur6mxN60-1]
 
 ---
 
